@@ -33,6 +33,31 @@ def arquivoExiste(nome):
         return True
 
 
+def lerArquivo(nome):
+    """
+    Docstring for lerArquivo
+    
+    :param nome: Recebe o nome do arquivo a ser lido
+    :return: retorna os arquivos lidos
+    """
+    try:
+        a = open(nome, 'rt')
+    except:
+        print('Falha ao ler o arquivo.')
+    else:
+        print(f'{"POS.":<7}{"ID":<5}{"NOME":^25}{"IDADE":>3}')
+        linhas = a.readlines()
+        
+        for i, value in enumerate(linhas):
+           partes = value.strip().split(';')
+           
+           if len(partes) == 3:
+                id_, nome, idade = partes
+                print(f'{i+1:<7}{id_:<5}{nome:^25}{idade:>3}')
+    finally:
+        a.close()
+
+
 def criarArquivo(nome):
     """
     Docstring for criarArquivo
@@ -46,4 +71,45 @@ def criarArquivo(nome):
     except:
         print('Houve um erro na criação do arquivo')
     else:
-        return True
+        print(f'Arquivo {nome} criado com sucesso')
+
+
+def cadastrar(arq,id,nome='<Desconhecido>', idade=0):
+    try:
+        a = open(arq, 'at')
+    except:
+        print("Houve um erro na abertura do arquivo.")
+    else:
+        try:
+            if nome == '':
+                nome = '<Desconhecido>'
+            a.write(f'{id};{nome};{idade}\n')
+        except:
+            print("Falha ao adicionar")
+        else:
+            print(f'Novo registro. {nome} adicionado à repositório.')
+        finally:
+            a.close()
+            
+
+
+
+def deletar(arq,cod):
+    try:
+        a = open(arq, 'rt')
+        dados = a.readlines()
+        a.close()
+        
+        for i in range(len(dados)):
+            if dados[i].startswith(str(cod)):
+                del dados[i]
+                break
+        
+        a = open(arq, 'wt')
+        for i in dados:
+            a.write(i)
+        a.close()
+    except (ValueError, TypeError, IndexError):
+        print("\033[31mERRO! ID não encontrado, não foi possível excluir.\033[0m")
+    else:
+        print(f'ID {cod} deletado com sucesso')
