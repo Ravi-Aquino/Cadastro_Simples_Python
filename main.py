@@ -1,7 +1,7 @@
 from lib.interface.__init__ import *
 from lib.funcs.__init__ import *
 from time import sleep
-import random
+
 
 arq = r'arquivo\Repositório.txt'
 if arquivoExiste(arq):
@@ -9,7 +9,8 @@ if arquivoExiste(arq):
 else:
     criarArquivo(arq)
     
-opções = ['Ver Pessoas cadastradas','Cadastrar nova Pessoa','Remover indivíduo', 'Sair do Sistema']
+# Opções que aparecerão para o usuário escolher
+opções = ['Ver Pessoas cadastradas','Cadastrar nova Pessoa','Remover uma Pessoa','Alterar uma Pessoa', 'Sair do Sistema']
 menu(opções)
 
 while True:
@@ -28,7 +29,7 @@ while True:
             cabeçalho('CADASTRAR NOVA PESSOA')
             nome = str(input('Nome: ')).capitalize().strip()
             idade = leiaInt('Idade: ')
-            idPessoa = randomizar(arq)
+            idPessoa = geradorId(arq)
             cadastrar(arq,idPessoa,nome,idade)
             resp = str(input('Quer continuar? [S/N] ')).upper().strip()[0]
             
@@ -62,7 +63,38 @@ while True:
                     
         sleep(0.5)
         menu(opções)
+        
     elif escolha == 4:
+        cabeçalho("ALTERANDO UMA PESSOA")
+        print(f'{"POS.":<7}{"ID":<5}{"NOME":^25}{"IDADE":>3}')
+        print('-'*50)
+        lerArquivo(arq)
+        
+        cod = leiaInt('Id da pessoa a ser atualizada: ')
+        ações = ['Alterar Nome', 'Alterar idade']
+        menu(ações)
+        opc = leiaInt("\033[33mSua opção: \033[0m")
+        
+        if opc == 1:
+            novoNome = str(input("\033[35mNovo nome: \033[0m")).strip().capitalize()
+            
+            if novoNome == '':
+                novoNome = "<Desconhecido>"
+                
+            atualizarNome(arq, cod, novoNome)
+            sleep(1)
+            menu(opções)
+            
+        elif opc == 2:
+            novaIdade = leiaInt("Nova idade: ")
+            
+            if novaIdade == None:
+                novaIdade = 0
+                
+            atualizarIdade(arq,cod, novaIdade)
+            sleep(1)
+            menu(opções)       
+    elif escolha == 5:
         cabeçalho('ENCERRANDO O PROGRAMA')
         break
     else:

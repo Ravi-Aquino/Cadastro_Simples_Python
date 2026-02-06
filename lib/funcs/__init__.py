@@ -1,4 +1,3 @@
-import random
 def leiaInt(msg):
     """
     Docstring for leiaInt
@@ -13,7 +12,7 @@ def leiaInt(msg):
             print('\033[31mERRO! por favor digite corretamente!\033[0m')
         except KeyboardInterrupt:
             print('\033[32mERRO! O usuário preferiu não digitar esse valor.\033[0m')
-            return 4
+            return 5
         else:
             return n
             
@@ -101,7 +100,7 @@ def cadastrar(arq,id,nome='<Desconhecido>', idade=0):
             a.close()
             
 
-def randomizar(arq):
+def geradorId(arq):
     """
     Docstring for randomizar
     
@@ -118,15 +117,15 @@ def randomizar(arq):
         a.close()
         
         ids_existentes = []
+        novo_id = 0
         for linha in linhas:
             partes = linha.strip().split(';')
             ids_existentes.append(partes[0])
-        
+            novo_id += 1
         while True:
-           novo_id = str(random.randint(1,50))
-           if novo_id not in ids_existentes:
-               return novo_id
-    
+            if not novo_id in ids_existentes:
+                return novo_id
+     
         
 
 def deletarId(arq,cod):
@@ -184,4 +183,57 @@ def deletarPos(arq,cod):
     except (ValueError, TypeError, IndexError):
         print("\033[31mERRO! Posição não encontrada, não foi possível excluir.\033[0m")  
     else:
-        print(f'\033[32mPosição {cod} deletada com sucesso!\033[0m')                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+        print(f'\033[32mPosição {cod} deletada com sucesso!\033[0m')     
+        
+
+def atualizarNome(arq, id, nome):
+    try:
+        a = open(arq, 'rt')
+    except:
+        print('Falha ao ler o arquivo.')
+    else:
+        linhas = a.readlines()
+        a.close()
+       
+        for i in range(len(linhas)):
+            partes = linhas[i].strip().split(';')
+            if partes[0] == str(id):
+               partes[1] = nome
+               linhas[i] = ';'.join(partes) + '\n'
+               break
+           
+        a = open(arq, 'wt')
+        a.writelines(linhas)
+        a.close()
+        print("\033[32mNome atualizado com sucesso!\033[0m")
+    finally:
+        try:
+            a.close()
+        except:
+            pass
+        
+def atualizarIdade(arq, id, idade):
+    try:
+        a = open(arq, 'rt')
+    except:
+        print('\033[31mHouve um erro ao abrir o arquivo!\033[0m')
+    else:
+        linhas = a.readlines()
+        a.close()
+        
+        for i in range(len(linhas)):
+            partes = linhas[i].strip().split(';')
+            if partes[0] == str(id):
+                partes[2] = str(idade)
+                linhas[i] = ';'.join(partes) + '\n'
+                break
+            
+        a = open(arq, 'wt')
+        a.writelines(linhas)
+        a.close()
+        print("\033[32mIdade atualizada com sucesso!\033[0m") 
+    finally:
+        try:
+            a.close()
+        except:
+            pass                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          

@@ -1,3 +1,8 @@
-16;Ravi;16
-7;Maria;16
-49;Joana;20
+0;Ravi;16
+1;Maria;24
+2;Carlos;12
+3;Rogerio;67
+4;Gustavo;19
+5;Kaio;2
+6;<Desconhecido>;8
+7;João;13
