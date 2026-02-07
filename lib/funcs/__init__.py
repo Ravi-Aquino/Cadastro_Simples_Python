@@ -11,8 +11,7 @@ def leiaInt(msg):
         except (ValueError, TypeError):
             print('\033[31mERRO! por favor digite corretamente!\033[0m')
         except KeyboardInterrupt:
-            print('\033[32mERRO! O usuário preferiu não digitar esse valor.\033[0m')
-            return 5
+            raise
         else:
             return n
             
@@ -91,6 +90,7 @@ def cadastrar(arq,id,nome='<Desconhecido>', idade=0):
         try:
             if nome == '':
                 nome = '<Desconhecido>'
+            
             a.write(f'{id};{nome};{idade}\n')
         except:
             print("Falha ao adicionar")

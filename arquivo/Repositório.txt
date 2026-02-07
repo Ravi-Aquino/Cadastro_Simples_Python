@@ -5,4 +5,4 @@
 4;Gustavo;19
 5;Kaio;2
 6;<Desconhecido>;8
-7;João;13
+7;Joï¿½o;13
