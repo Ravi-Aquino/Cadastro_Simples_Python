@@ -1,6 +1,19 @@
-# CRUD_Simples_Python
-Um projeto pequeno apenas para prática e treino das minhas habilidades na linguagem python
-Nesse sistema, o CRUD será feito em 3 partes usando modularização, a primeira parte é sobre o menu e a interface básica criada no terminal, a segunda será as funções mais
-complexas e a terceira o código principal onde tudo funcionará.
+# CRUD Simples em Python
 
-Como esperado, é possível ler, adicionar, atualizar e deletar dados nesse sistema.
+Um projeto pequeno criado para prática e treino das minhas habilidades na linguagem Python.  
+O sistema é modularizado em três partes:
+
+1. **Menu e interface básica** – interação pelo terminal.  
+2. **Funções principais** – operações de leitura, adição, atualização e exclusão.  
+3. **Código principal** – integração de todas as partes para execução do sistema.  
+
+## Como usar
+- Clone este repositório
+- Execute o arquivo principal no terminal
+- Navegue pelo menu para realizar operações CRUD
+
+## Objetivo
+Praticar conceitos de:
+- Modularização
+- Estrutura de programas em Python
+- Operações CRUD (Create, Read, Update, Delete)
